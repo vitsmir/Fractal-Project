@@ -4,12 +4,16 @@ import random
 import time
 import numpy as np
 
+colour=(128,255,128)
+background=(0,0,0)
+
 class turtle:
     pen=1
     pos=(200,200)
     angle=0
-    color=(0,0,0)
+    color=(128,255,128)
     size=1
+    
 
     def lt(self, a):
         self.angle=self.angle-a
@@ -74,7 +78,9 @@ def transX(rotate, scale, shift):
    return np.dot(r,s)+sh
 
 def dt(vector,center,L):
-   pygame.draw.line(screen, (0,0,0), (vector[0]*L+center[0],-vector[1]*L+center[1]), (vector[0]*L+center[0],-vector[1]*L+center[1]), 1)
+   pygame.draw.line(screen, colour, (vector[0]*L+center[0],-vector[1]*L+center[1]), (vector[0]*L+center[0],-vector[1]*L+center[1]), 1)
+
+
 
 class lfractal:
     axiom=""
@@ -114,7 +120,7 @@ class lfractal:
 
     def draw(self):
         commands=create_l_system(self.iterations, self.axiom, self.rules)
-        screen.fill((255,255,255))
+        screen.fill(background)
         self.t.setangle(0)
         self.t.goto(self.center)
         s=1
@@ -128,7 +134,7 @@ class lfractal:
                 
     def init(self):
         self.commands=create_l_system(self.iterations, self.axiom, self.rules)
-        screen.fill((255,255,255))
+        screen.fill(background)
         self.t.setangle(0)
         self.t.goto(self.center)
         self.ccmd=0
@@ -151,7 +157,7 @@ class lfractal:
 class IFSfractal:
     center=(600,400)
     speed=1
-    limit=600000
+    limit=400000
     m=[]
     L=700
     K=0
@@ -160,7 +166,7 @@ class IFSfractal:
        self.m=list([]) 
     
     def init (self):
-        screen.fill((255,255,255))
+        screen.fill(background)
         self.K=0
         self.v=np.array([0, 0, 1])
         if self.speed==0:
@@ -181,7 +187,7 @@ class IFSfractal:
             return(1)
         
     def draw (self):
-        screen.fill((255,255,255))
+        screen.fill(background)
         K=0
         v=np.array([0, 0, 1])
         s=0
@@ -199,7 +205,6 @@ class IFSfractal:
            else:
               s=s+1
         pygame.display.update()
-
 
 #Shirt for exhibition on Ideju Druka
 
@@ -233,7 +238,7 @@ dragon.m.append(trans(135, math.sin(math.radians(45)), (-1, 0)))
 tree=IFSfractal()
 tree.center=(600,700)
 tree.speed=25
-tree.limit=400000
+tree.limit=320000
 tree.m.append(transX(0, (1/100, 1/2), ( 0, 0)))
 for i in range (3):
     tree.m.append(transX(25, (1/2, 3/5), ( 0, 2/5)))
@@ -245,7 +250,7 @@ tree.m.append(transX(-55, (1/4, 1/2), ( 0, 1/5)))
 triasierpinski=IFSfractal()
 triasierpinski.center=(600,375)
 triasierpinski.speed=25
-triasierpinski.limit=200000
+triasierpinski.limit=160000
 triasierpinski.m.append(trans(0, 1/2, (0, 1/4)))
 triasierpinski.m.append(trans(0, 1/2, (1/4, -1/4)))
 triasierpinski.m.append(trans(0, 1/2, (-1/4, -1/4)))
@@ -301,7 +306,7 @@ for i in range(8):
 tree2=IFSfractal()
 tree2.center=(600,700)
 tree2.speed=50
-tree2.limit=300000
+tree2.limit=240000
 tree2.L=600
 T=2/3*1.05
 tree2.m.append(transX(0, (0, 1/3), ( 0, 0)))
@@ -312,7 +317,7 @@ for i in range(3):
 bush=IFSfractal()
 bush.center=(600,700)
 bush.speed=50
-bush.limit=300000
+bush.limit=240000
 bush.m.append(transX(0, (0, 2/5), ( 0, 0)))
 bush.m.append(transX(15, (3/5, 3/5), ( 0, 0)))
 bush.m.append(transX(-15, (3/5, 3/5), ( 0, 0)))
@@ -322,7 +327,7 @@ for i in range (3):
 fern=IFSfractal()
 fern.center=(600,700)
 fern.speed=25
-fern.limit=350000
+fern.limit=280000
 fern.m.append(transX(0, (0, 1/7), ( 0, 0)))
 fern.m.append(transX(50, (-1/5, 2/5), ( 0, 1/12)))
 fern.m.append(transX(-45, (1/5, 2/5), ( 0, 1/15)))
@@ -383,29 +388,77 @@ sierarrow.iterations=8
 sierarrow.angle=60
 sierarrow.distance=3
 
+dragon2=lfractal()
+dragon2.center=(200,300)
+dragon2.speed=6
+dragon2.axiom="X"
+dragon2.rules={"X":"+Y--X+", "Y":"-Y++X-"}
+dragon2.iterations=12
+dragon2.angle=45
+dragon2.distance=10
+
+tree3=lfractal()
+tree3.center=(600,700)
+tree3.speed=6
+tree3.axiom="---A"
+tree3.rules={"K":"KFF", "A":"K-(AF)+(AF)+(AF)"}
+tree3.iterations=7
+tree3.angle=30
+tree3.distance=12.5
+tree3.noise=0.4
+
+bush2=lfractal()
+bush2.center=(600,700)
+bush2.speed=6
+bush2.axiom="------A"
+bush2.rules={"K":"KF", "A":"-(A)++(A)-K(A)"}
+bush2.iterations=8
+bush2.angle=15
+bush2.distance=20
+
+peanogosper=lfractal()
+peanogosper.center=(700,100)
+peanogosper.speed=6
+peanogosper.axiom="FA"
+peanogosper.rules={"A":"A+BF++BF-FA--FAFA-BF+", "B":"-FA+BFBF++BF+FA--FA-B"}
+peanogosper.iterations=4
+peanogosper.angle=60
+peanogosper.distance=12
+
+hilbert=lfractal()
+hilbert.center=(300,50)
+hilbert.speed=6
+hilbert.axiom="L"
+hilbert.rules={"L":"+RF-LFL-FR+", "R":"-LF+RFR+FL-"}
+hilbert.iterations=6
+hilbert.angle=90
+hilbert.distance=10
+
 
 mainloop=[]
 mainloop.append(koh)
+mainloop.append(cross)
 mainloop.append(xmas)
+mainloop.append(hilbert)
+mainloop.append(peanogosper)
+mainloop.append(auseklis)
+mainloop.append(dragon2)
 mainloop.append(dragon)
+mainloop.append(sierarrow)
 mainloop.append(triasierpinski)
 mainloop.append(carpsierpinski)
 mainloop.append(anneslace)
 mainloop.append(spiral)
 mainloop.append(spiral2)
+mainloop.append(snowflake2)
 mainloop.append(snowflake)
+mainloop.append(tree3)
 mainloop.append(tree2)
 mainloop.append(tree)
+mainloop.append(bush2)
 mainloop.append(bush)
 mainloop.append(fern)
 mainloop.append(maple)
-mainloop.append(snowflake2)
-mainloop.append(tree3)
-mainloop.append(cross)
-mainloop.append(auseklis)
-mainloop.append(sierarrow)
-
-
 
 pygame.init()
 screen = pygame.display.set_mode((1200, 800))
@@ -446,4 +499,3 @@ while True:
         if mainloop[cFractal].drawdot()==0:
             #print('next')
             cFractal=getnext(cFractal,1)
-
