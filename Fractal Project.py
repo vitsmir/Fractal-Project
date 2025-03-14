@@ -4,14 +4,14 @@ import random
 import time
 import numpy as np
 
-colour=(128,255,128)
-background=(0,0,0)
+colour=(0,0,0)
+background=(255,255,255)
 
 class turtle:
     pen=1
     pos=(200,200)
     angle=0
-    color=(128,255,128)
+    color=(0,0,0)
     size=1
     
 
@@ -206,14 +206,12 @@ class IFSfractal:
               s=s+1
         pygame.display.update()
 
-#Shirt for exhibition on Ideju Druka
-
 koh=lfractal()
 koh.axiom="-F++F++F"
 koh.rules={"F":"F-F++F-F"}
 koh.center=(350,550)
-koh.iterations=5
-koh.distance=2.5
+koh.iterations=4
+koh.distance=5
 koh.noise=0
 koh.angle=60
 koh.speed=1
