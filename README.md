@@ -2,3 +2,7 @@ I have written a Python code, in which series of different types and variations 
 
 ### L-system Dragon Curve
 ![dragon](samples/dragon.gif)
+
+
+### IFS Dragon Curve
+![dragon2](samples/dragon2.gif)
