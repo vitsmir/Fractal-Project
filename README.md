@@ -5,7 +5,7 @@ Where it all started, where I experienced the first passion for Fractals.
 
 
 ### Koh Snowflake
-![koh_snowflake](samples/koh_snowflake.gif)
+![koh snowflake](samples/kohsnowflake.gif)
 
 
 ### L-system Dragon Curve
