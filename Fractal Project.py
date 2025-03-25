@@ -3,9 +3,11 @@ import math
 import random
 import time
 import numpy as np
+#Import necessary libraries for the program to work (pygame:graphics, numpy:transformations, time:scrolling fractals, etc.)
 
 colour=(0,0,0)
 background=(255,255,255)
+#Define and set colors and background of the program
 
 class turtle:
     pen=1
@@ -13,27 +15,35 @@ class turtle:
     angle=0
     color=(0,0,0)
     size=1
+    #Define the class 'turtle' which will draw. (pos:starting position, angle:starting angle, etc.)
     
 
     def lt(self, a):
         self.angle=self.angle-a
+        #Rotation to the left (to specific fractal)
     
     def rt(self, a):
         self.angle=self.angle+a
+        #Rotation to the right (to specific fractal)
         
     def fd(self, l):
         newpos=(round(self.pos[0]+l*100*math.cos(math.radians(self.angle))), round(self.pos[1]+l*100*math.sin(math.radians(self.angle))))
         pygame.draw.line(screen, self.color, (self.pos[0]/100, self.pos[1]/100),  (newpos[0]/100, newpos[1]/100), self.size)
         self.pos=newpos
+        #Movement of the drawing turtle by 1 unit, uses trigonometry to determine the new coordinates of movement absed on the angle, calculates where to go from its current position (set / updated), updates position before next move. 
+        #All this is converted into radiancs because it works with cosine and sine.
         
     def goto(self, p):
         self.pos = (p[0]*100, p[1]*100)
+        #Sets the position of the turtle
 
     def getpos(self):
         return((self.pos[0]/100, self.pos[1]/100)) 
+        #Retrieves and stores the position
 
     def setangle(self, a):
         self.angle=a
+        #Sets angle (to specific fractal)
 
 def create_l_system(iters, axiom, rules):
     start_string = axiom
@@ -44,8 +54,12 @@ def create_l_system(iters, axiom, rules):
         end_string = "".join(rules[i] if i in rules else i for i in start_string)
         start_string = end_string
         #print(end_string)
-
+    
     return end_string
+
+    #Iteration: number of times to apply the transformation, axiom: starting pattern, rules: rules of transformation of axiom dependant on the amount of iterations. All these are set to specific fractal. If there is 0 iterations, don't draw anything. 
+    #Goes in cycles: replace starting axiom according to the rules, store and update to the new string so the next transformation starts from the next string of axiom.
+
 
 def trans(rotate, scale, shift):
    r=np.array([[math.cos(math.radians(rotate)),  math.sin(math.radians(rotate)), 0],
@@ -62,6 +76,8 @@ def trans(rotate, scale, shift):
                ])
    return np.dot(r,s)+sh
 
+#Rotate: rotation angle, scale: scalling factor, shift: change of directino in terms if x and y. Explanation in the READ ME
+
 def transX(rotate, scale, shift):
    r=np.array([[math.cos(math.radians(rotate)), math.sin(math.radians(rotate)), 0],
                    [-math.sin(math.radians(rotate)), math.cos(math.radians(rotate)), 0],
@@ -77,10 +93,12 @@ def transX(rotate, scale, shift):
                ])
    return np.dot(r,s)+sh
 
+#...
+
 def dt(vector,center,L):
    pygame.draw.line(screen, colour, (vector[0]*L+center[0],-vector[1]*L+center[1]), (vector[0]*L+center[0],-vector[1]*L+center[1]), 1)
 
-
+#Vector: direction / position of the line, center: center poitn on which the line will be drawn, L: scale factor of the line. Pygame draw line is used to draw on the screen, in whcih x1, y1 are the starting coordinates and x2, y2 are the ending coordinates.
 
 class lfractal:
     axiom=""
@@ -95,28 +113,39 @@ class lfractal:
     speed=1
     ccmd=0
     commands=""
+
+    #Noise: randomness of the movement to make a fractal look more natural, stack: used to save and restore the position and angle of the turtle, commands: rules for the fractal.
+    
     def draw_cmd(self, cmd):
         k=(1+self.noise*random.gauss(0, 1))
         if cmd == '+':
             self.t.rt(self.angle)
+            #turn right
         elif cmd == '-':
             self.t.lt(self.angle)
+            #Turn left
         elif cmd == '(':
             self.stack.append((self.t.getpos(), self.t.angle))
+            #Save position to stack
         elif cmd == 'S':
             self.t.size=self.t.size+1
+            #Increase size
         elif cmd == 's':
             self.t.size=self.t.size-1
+            #Descrease size
         elif cmd == 'f':
             self.t.fd(self.distance*k/2)
+            #Move forward with Noise
 
         elif cmd == ')':
             p = self.stack.pop()
             self.t.goto(p[0])
             self.t.angle = p[1]
+            #Restore position from stack
             
         elif cmd in 'FXYZK': 
             self.t.fd(self.distance*k)
+            #Move forward with noise
 
     def draw(self):
         commands=create_l_system(self.iterations, self.axiom, self.rules)
