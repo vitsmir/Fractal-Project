@@ -8,9 +8,6 @@ The L-system uses a recurring, rule based system in which the axiom (start patte
 Here is the rules, axiom for each iteration of the Koch Snowflake:
 
 
-Where it all started, where I experienced the first passion for Fractals.
-
-
 ### Koh Snowflake
 ![koh snowflake](samples/kohsnowflake.gif)
 
