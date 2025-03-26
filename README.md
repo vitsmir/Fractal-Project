@@ -18,3 +18,11 @@ Here is the rules, axiom for each iteration of the Koch Snowflake:
 
 ### IFS Dragon Curve
 ![dragon2](samples/dragon2.gif)
+
+
+### L-system Sierpinski Triangle
+![sierpinskitriangle](samples/sierpinskitriangle.gif)
+
+
+### IFS Sierpinski Triangle
+![sierpinskitriangle2](samples/sierpinskitriangle2.gif)
