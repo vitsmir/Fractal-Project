@@ -26,3 +26,20 @@ Here is the rules, axiom for each iteration of the Koch Snowflake:
 
 ### IFS Sierpinski Triangle
 ![sierpinskitriangle2](samples/sierpinskitriangle2.gif)
+
+
+### L-system Sierpinski Carpet
+![sierpinskicarpet](samples/sierpinskicarpet.gif)
+
+
+### IFS Sierpinski Carpet
+![sierpinskicarpet2](samples/sierpinskicarpet2.gif)
+
+
+### L-system Dragon Curve
+![hilbertcurve](samples/hilbertcurve.gif)
+
+
+Here is one of my own creations:
+### IFS Maple Leaf
+![mapleleaf](samples/mapleleaf.gif)
