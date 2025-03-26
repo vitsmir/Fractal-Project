@@ -7,6 +7,8 @@ The L-system uses a recurring, rule based system in which the axiom (start patte
 
 Here is the rules, axiom for each iteration of the Koch Snowflake:
 
+#Make it appealing to the reader, include maple leaf as first, mention the inspo from Paul Bourke (outline) and Fern (repeating leaves)
+
 
 ### Koh Snowflake
 ![koh snowflake](samples/kohsnowflake.gif)
