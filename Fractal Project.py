@@ -9,8 +9,8 @@ background=(255,255,255)
 
 #Define the class 'turtle' to work for pygame
 class turtle:
-    pen=1
     #1:down, 0:up
+    pen=1
     pos=(200,200)
     angle=0
     color=(0,0,0)
