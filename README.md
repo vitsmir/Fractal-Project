@@ -10,8 +10,13 @@ Here is one of my own creations:
 ![mapleleaf](samples/mapleleaf.gif)
 
 
-One of the mainly known fractals made by Michael Barnsley, the Barnsley Fern:
-### L-system Dragon Curve
+Inspired by the multiple fractals by Paul Bourke
+### IFS Tree
+![mapleleaf](samples/mapleleaf.gif)
+
+
+One of the mainly known fractals made by Michael Barnsley:
+### Barnsley Fern
 ![fern](samples/fern.gif)
 
 #Make it appealing to the reader, include maple leaf as first, mention the inspo from Paul Bourke (outline) and Fern (repeating leaves)
