@@ -5,7 +5,14 @@ There are 2 main types of creating fractals: IFS and Lindenmayer system (L-syste
 The L-system uses a recurring, rule based system in which the axiom (start pattern) is extended using the rules of the set fractal. The amount of times it is done is set by the iteration.
 
 
-Here is the rules, axiom for each iteration of the Koch Snowflake:
+Here is one of my own creations:
+### IFS Maple Leaf
+![mapleleaf](samples/mapleleaf.gif)
+
+
+One of the mainly known fractals made by Michael Barnsley, the Barnsley Fern:
+### L-system Dragon Curve
+![fern](samples/fern.gif)
 
 #Make it appealing to the reader, include maple leaf as first, mention the inspo from Paul Bourke (outline) and Fern (repeating leaves)
 
@@ -30,9 +37,6 @@ Here is the rules, axiom for each iteration of the Koch Snowflake:
 ![sierpinskitriangle2](samples/sierpinskitriangle2.gif)
 
 
-### L-system Sierpinski Carpet
-![sierpinskicarpet](samples/sierpinskicarpet.gif)
-
 
 ### IFS Sierpinski Carpet
 ![sierpinskicarpet2](samples/sierpinskicarpet2.gif)
@@ -42,6 +46,4 @@ Here is the rules, axiom for each iteration of the Koch Snowflake:
 ![hilbertcurve](samples/hilbertcurve.gif)
 
 
-Here is one of my own creations:
-### IFS Maple Leaf
-![mapleleaf](samples/mapleleaf.gif)
+
