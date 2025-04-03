@@ -18,49 +18,48 @@ class turtle:
     
     
 
+    #Rotation to the left (to specific angle)
     def lt(self, a):
         self.angle=self.angle-a
-        #Rotation to the left (to specific angle)
     
+    #Rotation to the right (to specific angle)
     def rt(self, a):
         self.angle=self.angle+a
-        #Rotation to the right (to specific angle)
         
+    #Movement of the drawing turtle by 1 unit, uses trigonometry to determine the new coordinates of movement based on the angle.
     def fd(self, l):
         newpos=(round(self.pos[0]+l*100*math.cos(math.radians(self.angle))), round(self.pos[1]+l*100*math.sin(math.radians(self.angle))))
         pygame.draw.line(screen, self.color, (self.pos[0]/100, self.pos[1]/100),  (newpos[0]/100, newpos[1]/100), self.size)
         self.pos=newpos
-        #Movement of the drawing turtle by 1 unit, uses trigonometry to determine the new coordinates of movement based on the angle.
-        
+    
+    #Sets the position of the turtle
     def goto(self, p):
         self.pos = (p[0]*100, p[1]*100)
-        #Sets the position of the turtle
 
+    #Retrieves and stores the position
     def getpos(self):
         return((self.pos[0]/100, self.pos[1]/100)) 
-        #Retrieves and stores the position
 
+    #Sets angle (to specific fractal)
     def setangle(self, a):
         self.angle=a
-        #Sets angle (to specific fractal)
 
+ #Iteration: number of times to apply the transformation, axiom: starting pattern, rules: rules of transformation of axiom dependant on the amount of iterations. 
+    #Goes in cycles: replace starting axiom according to the rules, store and update to the new string so the next transformation starts from the next string of axiom.
 def create_l_system(iters, axiom, rules):
     start_string = axiom
     if iters == 0:
         return axiom
     end_string = ""
     for _ in range(iters):
-        #Pyhton magic for transformations
+        #Python magic for transformations
         end_string = "".join(rules[i] if i in rules else i for i in start_string)
         start_string = end_string
-        #print(end_string)
-    
+    #print(end_string)
     return end_string
 
-    #Iteration: number of times to apply the transformation, axiom: starting pattern, rules: rules of transformation of axiom dependant on the amount of iterations. 
-    #Goes in cycles: replace starting axiom according to the rules, store and update to the new string so the next transformation starts from the next string of axiom.
 
-
+#Makes transformation matrix: rotate: rotation angle, scale: scalling factor, shift: change of directino in terms if x and y. 
 def trans(rotate, scale, shift):
    r=np.array([[math.cos(math.radians(rotate)),  math.sin(math.radians(rotate)), 0],
                    [-math.sin(math.radians(rotate)), math.cos(math.radians(rotate)), 0],
@@ -76,8 +75,8 @@ def trans(rotate, scale, shift):
                ])
    return np.dot(r,s)+sh
 
-#Makes transformation matrix: rotate: rotation angle, scale: scalling factor, shift: change of directino in terms if x and y. 
 
+#Similar to trans but scale can differ on x and y
 def transX(rotate, scale, shift):
    r=np.array([[math.cos(math.radians(rotate)), math.sin(math.radians(rotate)), 0],
                    [-math.sin(math.radians(rotate)), math.cos(math.radians(rotate)), 0],
@@ -93,13 +92,13 @@ def transX(rotate, scale, shift):
                ])
    return np.dot(r,s)+sh
 
-#Similar to trans but scale can differ on x and y
 
+#Vector 'vector' is drawn form point 'center', size scalled to 'L'.
 def dt(vector,center,L):
    pygame.draw.line(screen, colour, (vector[0]*L+center[0],-vector[1]*L+center[1]), (vector[0]*L+center[0],-vector[1]*L+center[1]), 1)
 
-#Vector 'vector' is drawn form point 'center', size scalled to 'L'.
 
+#Class L-system fractal. Noise: randomness of the movement to make a fractal look more natural, stack: used to save and restore the position and angle of the turtle, commands: rules for the fractal.
 class lfractal:
     axiom=""
     rules=""
@@ -114,8 +113,7 @@ class lfractal:
     ccmd=0
     commands=""
 
-    #Class L-system fractal. Noise: randomness of the movement to make a fractal look more natural, stack: used to save and restore the position and angle of the turtle, commands: rules for the fractal.
-
+    
     #Run a single command
     def draw_cmd(self, cmd):
         k=(1+self.noise*random.gauss(0, 1))
@@ -138,16 +136,17 @@ class lfractal:
             self.t.fd(self.distance*k/2)
             #Move half a step forward (with Noise)
 
+        #Restore position from stack
         elif cmd == ')':
             p = self.stack.pop()
             self.t.goto(p[0])
             self.t.angle = p[1]
-            #Restore position from stack
             
+        #Move forward (with noise)
         elif cmd in 'FXYZK': 
             self.t.fd(self.distance*k)
-            #Move forward (with noise)
 
+    
     def draw(self):
         commands=create_l_system(self.iterations, self.axiom, self.rules)
         screen.fill(background)
@@ -543,5 +542,5 @@ while True:
                 
     if not pause:
         if mainloop[cFractal].drawdot()==0:
-            #print('next')
+            #print(next fractal)
             cFractal=getnext(cFractal,1)
